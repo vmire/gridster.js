@@ -719,9 +719,10 @@
     * @param {Boolean|Function} silent If true, widgets below the removed one
     * will not move up. If a Function is passed it will be used as callback.
     * @param {Function} callback Function executed when the widget is removed.
+    * @param {Integer} element fadeout duration (milliseconds) (jQuery default: 400)
     * @return {Class} Returns the instance of the Gridster Class.
     */
-    fn.remove_widget = function(el, silent, callback) {
+    fn.remove_widget = function(el, silent, callback, fadeoutDuration) {
         var $el = el instanceof $ ? el : $(el);
         var wgd = $el.coords().grid;
 
@@ -738,7 +739,7 @@
 
         this.remove_from_gridmap(wgd);
 
-        $el.fadeOut($.proxy(function() {
+        $el.fadeOut(fadeoutDuration,$.proxy(function() {
             $el.remove();
 
             if (!silent) {
